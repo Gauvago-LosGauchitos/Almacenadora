@@ -1,6 +1,6 @@
 'use strict'
 
-import Tareas from "./tareas.model"
+import Tareas from "./tareas.model.js"
 
 
 //Crear una nueva tarea
@@ -33,7 +33,7 @@ export const listTareas = async (req, res)=>{
 }
 
 //Editar tareas
-export const editarTareas = async (req, res)=>{
+export const editTareas = async (req, res)=>{
     try {
         const {id} = req.params
         const data = req.body
@@ -56,7 +56,7 @@ export const editarTareas = async (req, res)=>{
 }
 
 //Eliminar tareas
-export const eliminarTarea = async ( req, res )=>{
+export const deleteTarea = async ( req, res )=>{
     try {
         const { id } = req.params
         let eliminarTarea = await Tareas.findOneAndDelete({ _id: id })

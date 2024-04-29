@@ -1,0 +1,107 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Almacenadora",
+    "collectionId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
+    "dateExported": "2024-04-29T17:17:14.002Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "name": "tareas",
+            "containerId": "",
+            "created": "2024-04-29T17:08:44.354Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "f45514a7-17d9-40bb-808e-134eb6d10e0b",
+            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
+            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "name": "crear",
+            "url": "http://localhost:2676/tarea/createTarea",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-04-29T17:08:51.988Z",
+            "modified": "2024-04-29T17:14:23.501Z",
+            "headers": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "nombre",
+                        "value": "Lista1"
+                    },
+                    {
+                        "name": "description",
+                        "value": "tarea1"
+                    },
+                    {
+                        "name": "fechaInicio",
+                        "value": "05/05/2024"
+                    },
+                    {
+                        "name": "fechaFin",
+                        "value": "05/05/2024"
+                    },
+                    {
+                        "name": "estado",
+                        "value": "true"
+                    },
+                    {
+                        "name": "nombreYapellidoPersona",
+                        "value": "Juan Boteo"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "d7ff14aa-186c-47ab-9bb5-8f59ddf8fb07",
+            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
+            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "name": "ver",
+            "url": "http://localhost:2676/tarea/listTareas",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-29T17:08:56.842Z",
+            "modified": "2024-04-29T17:14:55.163Z",
+            "headers": []
+        },
+        {
+            "_id": "53841a55-b08a-43bb-9a9e-8a98ff5ba430",
+            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
+            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "name": "editar",
+            "url": "http://localhost:2676/tarea/editTarea/662fd56f54059cf119d3e936",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-04-29T17:09:03.789Z",
+            "modified": "2024-04-29T17:16:21.462Z",
+            "headers": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "nombre",
+                        "value": "lista2"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "6615c66f-e91b-4b93-9791-0c9bb656f6b0",
+            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
+            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "name": "eliminar",
+            "url": "http://localhost:2676/tarea/deleteTarea/662fd56f54059cf119d3e936",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-04-29T17:09:08.777Z",
+            "modified": "2024-04-29T17:16:46.965Z",
+            "headers": []
+        }
+    ],
+    "ref": "eHL1eT9_ApT3Fxqz2zAJT4K8E2-bueha_DolZxJbuV5kCwtV_jEn19TcIQR7w309Lm_ByMYcoq4DQLM6iHZkOA"
+}
