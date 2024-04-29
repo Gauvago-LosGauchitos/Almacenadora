@@ -15,7 +15,7 @@ export const connect = async ()=>{
             console.log('MongoDB | connected to mongodb')
         })
         mongoose.connection.once('open', async ()=>{
-            console.log('MongoDB | connected to database || Welcome to Gauvago');
+            console.log('MongoDB | connected to database || Welcome to Storage Machine');
         })
         mongoose.connection.on('reconnected', ()=>{
             console.log('MongoDB | reconected to mongodb')
