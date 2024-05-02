@@ -19,13 +19,14 @@ export const addTaskRequest = async (tarea) => {
 export const getTaskRequest = async () => {
     try {
         const response = await apiClient.get('/listTareas')
-        console.log("Respuesta de la API en getTaskRequest:", response.data)
         return response.data.tareas
     } catch (err) {
         console.error('Error al obtener las tareas en getTaskRequest:', err)
         throw err
     }
 }
+
+
 
 export const updateTaskRequest = async (taskId, updatedTask) => {
     try {
@@ -48,3 +49,5 @@ export const deleteTaskRequest = async (taskId) => {
         }
     }
 }
+
+

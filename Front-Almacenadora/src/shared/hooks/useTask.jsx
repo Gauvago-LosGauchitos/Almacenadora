@@ -20,19 +20,16 @@ export const useTask = () => {
             console.log(response)
             await getTasks()
         } catch (error) {
-            console.error('Error al agregar la tarea:', error)
             toast.error('Error al agregar la tarea')
         } finally {
             setIsLoading(false)
         }
     }
 
-    const getTasks = async () => {
-        console.log(tasks)
+   const getTasks = async () => {
         setIsLoading(true)
         try {
             const taskData = await getTaskRequest()
-            console.log("Datos de las tareas:", taskData)
             setTasks(taskData)
         } catch (error) {
             console.error('Error al obtener las tareas:', error)
@@ -40,6 +37,9 @@ export const useTask = () => {
             setIsLoading(false)
         }
     }
+    
+   
+
 
     const updateTask = async (taskId, updatedTask) => {
         setIsLoading(true)
@@ -71,7 +71,6 @@ export const useTask = () => {
 
     useEffect(() => {
         getTasks()
-        console.log(tasks)
     }, [])
 
     return {

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { Input } from "./Input"
+import axios from "axios";
 import { useTask } from "../shared/hooks/useTask.jsx"
-import {
+import {    
     descriptionValidationMessage,
     fechaFinValidationMessage,
     nombreValidationMessage,
@@ -17,6 +18,7 @@ import './ListaTareas.css'
 
 export const TodoListForm = () => {
     const { addTask, updateTask, deleteTask, isLoading, getTasks } = useTask()
+    
     const [tasks, setTasks] = useState([])
 
     const [formData, setFormData] = useState({
@@ -54,12 +56,12 @@ export const TodoListForm = () => {
         !formData.fechaFin.isValid ||
         !formData.nombreYapellidoPersona.isValid
 
-    useEffect(() => {
+   useEffect(() => {
         const fetchTasks = async () => {
             try {
                 const tasksData = await getTasks()
-                console.log("Datos de las tareas en fetchTasks:", tasksData)
                 setTasks(tasksData)
+                console.log('Tasks:', tasks)
             } catch (error) {
                 console.error("Error al obtener las tareas en fetchTasks:", error)
             }
@@ -67,9 +69,7 @@ export const TodoListForm = () => {
         fetchTasks()
     }, [])
 
-    useEffect(() => {
-        console.log("Las tareas han cambiado:", tasks)
-    }, [tasks])
+
 
     const handleValueChange = (value, field) => {
         setFormData((prevData) => ({
