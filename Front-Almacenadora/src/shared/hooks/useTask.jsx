@@ -28,6 +28,7 @@ export const useTask = () => {
     }
 
     const getTasks = async () => {
+        console.log(tasks)
         setIsLoading(true)
         try {
             const taskData = await getTaskRequest()
@@ -70,6 +71,7 @@ export const useTask = () => {
 
     useEffect(() => {
         getTasks()
+        console.log(tasks)
     }, [])
 
     return {

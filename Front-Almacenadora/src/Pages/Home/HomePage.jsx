@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './HomePage.css'
 
 export const HomePage = () => {
-  const [isTask, setIsTask] = useState(false)
+  const [isTask, setIsTask] = useState(true)
   const handleHomePage = () => {
     setIsTask((prev) => !prev)
   }

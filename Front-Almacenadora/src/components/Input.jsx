@@ -51,13 +51,13 @@ export const Input = ({
 }
 
 Input.propTypes = {
-    field: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    field: PropTypes.any.isRequired,
+    label: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
     onChangeHandler: PropTypes.func.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.any.isRequired,
     showErrorMessage: PropTypes.bool.isRequired,
-    validationMessage: PropTypes.string,
+    validationMessage: PropTypes.any,
     onBlurHandler: PropTypes.func.isRequired,
     textarea: PropTypes.bool
 }
