@@ -21,8 +21,10 @@ export const getTaskRequest = async () => {
         const response = await apiClient.get('/listTareas')
         return response.data.tareas
     } catch (err) {
-        console.error('Error al obtener las tareas en getTaskRequest:', err)
-        throw err
+        return {
+            error: true,
+            err
+        }
     }
 }
 

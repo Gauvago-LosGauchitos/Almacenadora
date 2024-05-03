@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import { Input } from "./Input"
-import axios from "axios";
 import { useTask } from "../shared/hooks/useTask.jsx"
-import {    
+import {
     descriptionValidationMessage,
     fechaFinValidationMessage,
     nombreValidationMessage,
@@ -17,9 +16,10 @@ import toast from 'react-hot-toast'
 import './ListaTareas.css'
 
 export const TodoListForm = () => {
-    const { addTask, updateTask, deleteTask, isLoading, getTasks } = useTask()
-    
-    const [tasks, setTasks] = useState([])
+    const { addTask, updateTask, deleteTask, isLoading, getTasks, tasks } = useTask()
+
+    const [tasksC, setTaskC] = useState()
+    const [isLoadingTasks, setIsLoadingTasks] = useState(true)
 
     const [formData, setFormData] = useState({
         nombre: {
@@ -56,17 +56,21 @@ export const TodoListForm = () => {
         !formData.fechaFin.isValid ||
         !formData.nombreYapellidoPersona.isValid
 
-   useEffect(() => {
+
+        
         const fetchTasks = async () => {
             try {
-                const tasksData = await getTasks()
-                setTasks(tasksData)
-                console.log('Tasks:', tasks)
+              setTaskC(tasks)
             } catch (error) {
-                console.error("Error al obtener las tareas en fetchTasks:", error)
+              console.error("Error al obtener las tareas en fetchTasks:", error)
+            }finally{
+                setIsLoadingTasks(false)
             }
-        }
-        fetchTasks()
+          }
+
+    useEffect(() => {
+          fetchTasks() 
+          setTaskC(tasks)         
     }, [])
 
 
@@ -228,19 +232,22 @@ export const TodoListForm = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {tasks && tasks.map((task, index) => (
-                            <tr key={index}>
-                                <td>{task.nombre}</td>
-                                <td>{task.description}</td>
-                                <td>{task.fechaInicio}</td>
-                                <td>{task.fechaFin}</td>
-                                <td>{task.nombreYapellidoPersona}</td>
-                                <td>
-                                    <button onClick={() => handleUpdateTask(task._id)}>Actualizar</button>
-                                    <button onClick={() => handleDeleteTask(task._id)}>Eliminar</button>
-                                </td>
-                            </tr>
-                        ))}
+                        {
+                            tasksC && tasksC.map((task, index) => (
+
+                                <tr key={index}>
+                                    <td>{task.nombre}</td>
+                                    <td>{task.description}</td>
+                                    <td>{task.fechaInicio}</td>
+                                    <td>{task.fechaFin}</td>
+                                    <td>{task.nombreYapellidoPersona}</td>
+                                    <td>
+                                        <button onClick={() => handleUpdateTask(task._id)}>Actualizar</button>
+                                        <button onClick={() => handleDeleteTask(task._id)}>Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             </div>

@@ -4,7 +4,7 @@ import { addTaskRequest, getTaskRequest, updateTaskRequest, deleteTaskRequest } 
 
 export const useTask = () => {
     const [isLoading, setIsLoading] = useState(false)
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState()
 
     const addTask = async (nombre, description, fechaInicio, fechaFin, nombreYapellidoPersona) => {
         setIsLoading(true)
@@ -26,7 +26,7 @@ export const useTask = () => {
         }
     }
 
-   const getTasks = async () => {
+   /*const getTasks = async () => {
         setIsLoading(true)
         try {
             const taskData = await getTaskRequest()
@@ -36,10 +36,16 @@ export const useTask = () => {
         } finally {
             setIsLoading(false)
         }
-    }
-    
-   
+    }*/
 
+    const getTasks = async()=>{
+            const response = await getTaskRequest()
+            if(response.error){
+                response?.error?.data?.message || 'Error al obtener los post'
+            }
+            setTasks(response)
+        }
+    
 
     const updateTask = async (taskId, updatedTask) => {
         setIsLoading(true)
