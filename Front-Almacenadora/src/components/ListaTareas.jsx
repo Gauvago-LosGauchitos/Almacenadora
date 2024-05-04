@@ -182,6 +182,36 @@ export const TodoListForm = () => {
         }
     };
 
+    const handleRowClick = (task) => {
+        setFormData({
+            nombre: {
+                value: task.nombre,
+                isValid: true,
+                showError: false
+            },
+            description: {
+                value: task.description,
+                isValid: true,
+                showError: false
+            },
+            fechaInicio: {
+                value: task.fechaInicio,
+                isValid: true,
+                showError: false
+            },
+            fechaFin: {
+                value: task.fechaFin,
+                isValid: true,
+                showError: false
+            },
+            nombreYapellidoPersona: {
+                value: task.nombreYapellidoPersona,
+                isValid: true,
+                showError: false
+            }
+        });
+    };
+
     return (
         <div className="todo-list-container">
             <form className="todo-form" onSubmit={handleAddTask}>
@@ -259,7 +289,7 @@ export const TodoListForm = () => {
                     </thead>
                     <tbody>
                         {tasks && tasks.length > 0 && tasks.map((task, index) => (
-                            <tr key={index}>
+                            <tr key={index} onClick={() => handleRowClick(task)}>
                                 <td>{task.nombre}</td>
                                 <td>{task.description}</td>
                                 <td>{task.fechaInicio}</td>
@@ -286,3 +316,4 @@ export const TodoListForm = () => {
         </div>
     );
 };
+

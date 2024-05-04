@@ -6,22 +6,13 @@ body {
   }
 
 
-.todo-list-container {
+  .todo-list-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 50vw;
+    height: 98vh;
     --s: 37px;
-
-    /*--c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
-    --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
-    --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
-    --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
-    background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
-        var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
-        var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
-    background-size: calc(2 * var(--s)) calc(3.46 * var(--s));*/
 }
 
 .todo-form {
@@ -54,31 +45,29 @@ body {
     background-color: #45a049;
 }
 
+h2 {
+  margin-bottom: 20px;
+}
+
 table {
-    width: 80%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 table th,
 table td {
-    border: 1px solid #060606;
-    padding: 8px;
-    text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
 }
 
 table th {
-    background-color: #a81010;
+  background-color: #797676;
+  font-weight: bold;
 }
 
-table tr:nth-child(even) {
-    background-color: #9d5f5f;
-}
-
-table tr:hover {
-    background-color: #3718b6;
-}
-  
+table td {
+  text-align: center;
+} 
 
 .edit-button {
     width: 40px;
@@ -111,7 +100,7 @@ table tr:hover {
     width: 120px;
     border-radius: 50px;
     transition-duration: 0.3s;
-    background-color: rgb(255, 69, 69);
+    background-color: rgb(12, 220, 39);
     align-items: center;
   }
   
