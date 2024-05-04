@@ -18,7 +18,7 @@ import './ListaTareas.css'
 export const TodoListForm = () => {
     const { addTask, updateTask, deleteTask, isLoading, getTasks, tasks } = useTask()
 
-    const [tasksC, setTaskC] = useState()
+    const [tasksC, setTaskC] = useState([])
     const [isLoadingTasks, setIsLoadingTasks] = useState(true)
 
     const [formData, setFormData] = useState({
