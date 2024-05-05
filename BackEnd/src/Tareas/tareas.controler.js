@@ -76,3 +76,31 @@ export const deleteTarea = async ( req, res )=>{
         return res.status(500).send({message: 'Error eliminando tarea'})
     }
 }
+
+// Marcar tarea como completada
+export const markTarea = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Encontrar la tarea por su ID
+      let tarea = await Tareas.findById(id);
+  
+      // Si la tarea no existe, devolver un mensaje de error
+      if (!tarea) {
+        return res.status(404).send({ message: 'Tarea no encontrada' });
+      }
+  
+      // Actualizar el estado de la tarea a true (completada)
+      tarea.estado = true;
+  
+      // Guardar la tarea actualizada
+      await tarea.save();
+  
+      // Devolver un mensaje de éxito y la tarea actualizada
+      return res.status(200).send({ message: 'Tarea marcada como completada correctamente', tarea });
+  
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send({ message: 'Error marcando la tarea como completada' });
+    }
+  };
