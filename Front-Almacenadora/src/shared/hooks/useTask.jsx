@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import toast from 'react-hot-toast'
-import { addTaskRequest, getTaskRequest, updateTaskRequest, deleteTaskRequest } from "../../services/api.js"
+import { addTaskRequest, getTaskRequest, updateTaskRequest, deleteTaskRequest, markTaskRequest } from "../../services/api.js"
 
 export const useTask = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -75,6 +75,20 @@ export const useTask = () => {
         }
     }
 
+    const markTask = async (taskId) =>{
+        setIsLoading(true)
+        try {
+            const response =  await markTaskRequest(taskId)
+            console.log(response)
+            await getTasks() 
+        } catch (error) {
+            console.error('Error al marcar la tarea:', error)
+            toast.error('Error al marcar la tarea')
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     useEffect(() => {
         getTasks()
     }, [])
@@ -84,6 +98,7 @@ export const useTask = () => {
         getTasks,
         updateTask,
         deleteTask,
+        markTask,
         isLoading,
         tasks
     }

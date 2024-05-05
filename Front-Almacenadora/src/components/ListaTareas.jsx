@@ -17,7 +17,7 @@ import toast from 'react-hot-toast';
 import './ListaTareas.css';
 
 export const TodoListForm = () => {
-    const { addTask, updateTask, deleteTask, isLoading, getTasks, tasks } = useTask();
+    const { addTask, updateTask, deleteTask, isLoading, getTasks, tasks, markTask } = useTask();
 
     const [formData, setFormData] = useState({
         nombre: {
@@ -108,6 +108,36 @@ export const TodoListForm = () => {
         }));
     };
 
+    const resetForm = () => {
+        setFormData({
+          nombre: {
+            value: "",
+            isValid: false,
+            showError: false
+          },
+          description: {
+            value: "",
+            isValid: false,
+            showError: false
+          },
+          fechaInicio: {
+            value: "",
+            isValid: false,
+            showError: false
+          },
+          fechaFin: {
+            value: "",
+            isValid: false,
+            showError: false
+          },
+          nombreYapellidoPersona: {
+            value: "",
+            isValid: false,
+            showError: false
+          }
+        });
+      };
+
     const handleAddTask = async (e) => {
         e.preventDefault();
         try {
@@ -119,34 +149,8 @@ export const TodoListForm = () => {
                 formData.nombreYapellidoPersona.value
             );
             toast.success('Tarea agregada correctamente');
-            setFormData({
-                nombre: {
-                    value: "",
-                    isValid: false,
-                    showError: false
-                },
-                description: {
-                    value: "",
-                    isValid: false,
-                    showError: false
-                },
-                fechaInicio: {
-                    value: "",
-                    isValid: false,
-                    showError: false
-                },
-                fechaFin: {
-                    value: "",
-                    isValid: false,
-                    showError: false
-                },
-                nombreYapellidoPersona: {
-                    value: "",
-                    isValid: false,
-                    showError: false
-                }
-            });
-            fetchTasks();
+            fetchTasks()
+            resetForm()
         } catch (error) {
             console.error('Error al agregar la tarea:', error);
             toast.error('Error al agregar la tarea');
@@ -164,6 +168,7 @@ export const TodoListForm = () => {
             });
             toast.success('Tarea actualizada correctamente');
             fetchTasks();
+            resetForm()
         } catch (error) {
             console.error('Error al actualizar la tarea:', error);
             toast.error('Error al actualizar la tarea');
@@ -183,6 +188,21 @@ export const TodoListForm = () => {
         }
         
     };
+
+    const handleMarkTask = async(taskId) =>{
+        try {
+            await markTask(taskId, {
+                estado: !formData.estado.value
+            });
+            toast.success('Tarea actualizada correctamente');
+            fetchTasks();
+            resetForm()
+        } catch (error) {
+            console.error('Error al marcar la tarea:', error);
+            toast.error('Error al marcar la tarea');
+            
+        }
+    }    
 
     const handleRowClick = (task) => {
         setFormData({
@@ -332,7 +352,7 @@ export const TodoListForm = () => {
                                 </td>
                                 <td>
                                     <label class="cyberpunk-checkbox-label">
-                                        <input type="checkbox" class="cyberpunk-checkbox"/>
+                                        <input type="checkbox" class="cyberpunk-checkbox" onClick={() => handleMarkTask(task._id)}/>
                                         Hecho</label>
                                 </td>
                             </tr>

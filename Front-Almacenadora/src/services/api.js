@@ -28,8 +28,6 @@ export const getTaskRequest = async () => {
     }
 }
 
-
-
 export const updateTaskRequest = async (taskId, updatedTask) => {
     try {
         return await apiClient.put(`/editTarea/${taskId}`, updatedTask)
@@ -52,4 +50,14 @@ export const deleteTaskRequest = async (taskId) => {
     }
 }
 
+export const markTaskRequest = async(taskId) =>{
+    try {
+        return await apiClient.put(`/markTarea/${taskId}`)
+    } catch (err) {
+        return {
+            error: true,
+            err
+        }
+    }
+} 
 
