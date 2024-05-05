@@ -331,7 +331,7 @@ table td {
   appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid  rgb(20, 20, 20);;
+  border: 2px solid  #ddd;
   border-radius: 5px;
   background-color: transparent;
   display: inline-block;

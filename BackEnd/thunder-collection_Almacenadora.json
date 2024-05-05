@@ -1,29 +1,29 @@
 {
     "clientName": "Thunder Client",
     "collectionName": "Almacenadora",
-    "collectionId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
-    "dateExported": "2024-04-29T17:17:14.002Z",
+    "collectionId": "979af28c-0f79-46c3-90c9-cec159741339",
+    "dateExported": "2024-05-05T20:02:06.787Z",
     "version": "1.2",
     "folders": [
         {
-            "_id": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "_id": "85408368-9145-40a5-a98f-53834ba6f9cc",
             "name": "tareas",
             "containerId": "",
-            "created": "2024-04-29T17:08:44.354Z",
+            "created": "2024-05-05T19:12:03.398Z",
             "sortNum": 10000
         }
     ],
     "requests": [
         {
-            "_id": "f45514a7-17d9-40bb-808e-134eb6d10e0b",
-            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
-            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "_id": "f0f7c5ed-fa94-4e7b-bb3a-4b399435ce13",
+            "colId": "979af28c-0f79-46c3-90c9-cec159741339",
+            "containerId": "85408368-9145-40a5-a98f-53834ba6f9cc",
             "name": "crear",
             "url": "http://localhost:2676/tarea/createTarea",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2024-04-29T17:08:51.988Z",
-            "modified": "2024-04-29T17:14:23.501Z",
+            "created": "2024-05-05T19:12:03.399Z",
+            "modified": "2024-05-05T19:12:03.399Z",
             "headers": [],
             "body": {
                 "type": "formencoded",
@@ -57,27 +57,27 @@
             }
         },
         {
-            "_id": "d7ff14aa-186c-47ab-9bb5-8f59ddf8fb07",
-            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
-            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "_id": "a9ad332b-bd1d-454e-931c-f33f17219356",
+            "colId": "979af28c-0f79-46c3-90c9-cec159741339",
+            "containerId": "85408368-9145-40a5-a98f-53834ba6f9cc",
             "name": "ver",
             "url": "http://localhost:2676/tarea/listTareas",
             "method": "GET",
             "sortNum": 20000,
-            "created": "2024-04-29T17:08:56.842Z",
-            "modified": "2024-04-29T17:14:55.163Z",
+            "created": "2024-05-05T19:12:03.400Z",
+            "modified": "2024-05-05T19:12:03.400Z",
             "headers": []
         },
         {
-            "_id": "53841a55-b08a-43bb-9a9e-8a98ff5ba430",
-            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
-            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "_id": "f88a95c7-7373-4041-924b-3cfca285f7cb",
+            "colId": "979af28c-0f79-46c3-90c9-cec159741339",
+            "containerId": "85408368-9145-40a5-a98f-53834ba6f9cc",
             "name": "editar",
             "url": "http://localhost:2676/tarea/editTarea/662fd56f54059cf119d3e936",
             "method": "PUT",
             "sortNum": 30000,
-            "created": "2024-04-29T17:09:03.789Z",
-            "modified": "2024-04-29T17:16:21.462Z",
+            "created": "2024-05-05T19:12:03.401Z",
+            "modified": "2024-05-05T19:12:03.401Z",
             "headers": [],
             "body": {
                 "type": "formencoded",
@@ -91,17 +91,29 @@
             }
         },
         {
-            "_id": "6615c66f-e91b-4b93-9791-0c9bb656f6b0",
-            "colId": "0b3e120b-d319-4b07-a473-85c2e98bb23e",
-            "containerId": "4febc175-b0b0-47a9-8309-0c04498688ea",
+            "_id": "e61d6f71-5937-4d6c-806a-bebb8359fc53",
+            "colId": "979af28c-0f79-46c3-90c9-cec159741339",
+            "containerId": "85408368-9145-40a5-a98f-53834ba6f9cc",
             "name": "eliminar",
             "url": "http://localhost:2676/tarea/deleteTarea/662fd56f54059cf119d3e936",
             "method": "DELETE",
             "sortNum": 40000,
-            "created": "2024-04-29T17:09:08.777Z",
-            "modified": "2024-04-29T17:16:46.965Z",
+            "created": "2024-05-05T19:12:03.402Z",
+            "modified": "2024-05-05T19:12:03.402Z",
+            "headers": []
+        },
+        {
+            "_id": "f5e5de9e-c0f7-4658-a349-6dc146bb941c",
+            "colId": "979af28c-0f79-46c3-90c9-cec159741339",
+            "containerId": "85408368-9145-40a5-a98f-53834ba6f9cc",
+            "name": "marcar",
+            "url": "http://localhost:2676/tarea/markTarea/6637da65ddda1a7ec6a95b2d",
+            "method": "PATCH",
+            "sortNum": 50000,
+            "created": "2024-05-05T19:12:34.665Z",
+            "modified": "2024-05-05T19:14:51.224Z",
             "headers": []
         }
     ],
-    "ref": "eHL1eT9_ApT3Fxqz2zAJT4K8E2-bueha_DolZxJbuV5kCwtV_jEn19TcIQR7w309Lm_ByMYcoq4DQLM6iHZkOA"
+    "ref": "4o7Zl5vVtv8vp3DaAqUOgrz2MhrcwrooQ-Nr2HCUW9h07xnqivnulg4AreWLMHH0wyfnS2yhsk9GtlqidU0_cg"
 }

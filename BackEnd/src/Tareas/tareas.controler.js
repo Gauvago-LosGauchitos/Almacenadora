@@ -89,9 +89,12 @@ export const markTarea = async (req, res) => {
       if (!tarea) {
         return res.status(404).send({ message: 'Tarea no encontrada' });
       }
-  
-      // Actualizar el estado de la tarea a true (completada)
+      // Actualizar el estado de la tarea dependiendo del estado(true o false)
+      if(tarea.estado === false){
       tarea.estado = true;
+      }else if(tarea.estado === true){
+        tarea.estado = false;
+      }
   
       // Guardar la tarea actualizada
       await tarea.save();

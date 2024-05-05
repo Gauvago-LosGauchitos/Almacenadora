@@ -137,7 +137,7 @@ export const TodoListForm = () => {
           }
         });
       };
-
+      //Funcion para agregar una tarea
     const handleAddTask = async (e) => {
         e.preventDefault();
         try {
@@ -156,7 +156,7 @@ export const TodoListForm = () => {
             toast.error('Error al agregar la tarea');
         }
     };
-
+    //Funcion para editar una tarea
     const handleUpdateTask = async (taskId) => {
         try {
             await updateTask(taskId, {
@@ -174,7 +174,7 @@ export const TodoListForm = () => {
             toast.error('Error al actualizar la tarea');
         }
     };
-
+    //Funcion para eliminar una tarea
     const handleDeleteTask = async (taskId) => {
         if (window.confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
             try {
@@ -186,14 +186,17 @@ export const TodoListForm = () => {
                 toast.error('Error al eliminar la tarea');
             }
         }
+        resetForm()
         
     };
 
+    //Funcion para marcar tarea como hecho
     const handleMarkTask = async(taskId) =>{
         try {
             await markTask(taskId, {
-                estado: !formData.estado.value
+                estado: taskId.estado//Marca la tarea como el estado que traiga, que es true porque se ejecuto la funcion
             });
+            
             toast.success('Tarea actualizada correctamente');
             fetchTasks();
             resetForm()
@@ -202,7 +205,13 @@ export const TodoListForm = () => {
             toast.error('Error al marcar la tarea');
             
         }
-    }    
+    }   
+    
+    //Funcion para verificar si la tarea ya esta completada para marcar checkbox
+    const handleCheckboxChange = (task) => {
+        return task.estado//retorna el estado de la tarea
+
+    };
 
     const handleRowClick = (task) => {
         setFormData({
@@ -352,7 +361,7 @@ export const TodoListForm = () => {
                                 </td>
                                 <td>
                                     <label class="cyberpunk-checkbox-label">
-                                        <input type="checkbox" class="cyberpunk-checkbox" onClick={() => handleMarkTask(task._id)}/>
+                                        <input type="checkbox"checked={handleCheckboxChange(task)} class="cyberpunk-checkbox" onClick={() => handleMarkTask(task._id)}/>
                                         Hecho</label>
                                 </td>
                             </tr>

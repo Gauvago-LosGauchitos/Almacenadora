@@ -52,7 +52,7 @@ export const deleteTaskRequest = async (taskId) => {
 
 export const markTaskRequest = async(taskId) =>{
     try {
-        return await apiClient.put(`/markTarea/${taskId}`)
+        return await apiClient.patch(`/markTarea/${taskId}`)
     } catch (err) {
         return {
             error: true,
