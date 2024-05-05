@@ -68,4 +68,3 @@ export const deleteTarea = async ( req, res )=>{
         return res.status(500).send({message: 'Error eliminando tarea'})
     }
 }
-

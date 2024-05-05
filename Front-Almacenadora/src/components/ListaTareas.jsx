@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import logo from '../assets/img/gauchitosLogoHD.png'
 import { Input } from "./Input";
 import { useTask } from "../shared/hooks/useTask.jsx";
 import {
@@ -214,6 +215,15 @@ export const TodoListForm = () => {
 
     return (
         <div className="todo-list-container">
+            <nav class="navbar">
+                <div class="navbar-bg"></div>
+                <div class="navbar-content">
+                    <img 
+                        className="nav-logo" 
+                        src={logo}
+                        alt="Logo"/>
+                </div>
+            </nav>
             <form className="todo-form" onSubmit={handleAddTask}>
                 <Input
                     field="nombre"
@@ -269,14 +279,20 @@ export const TodoListForm = () => {
                     showErrorMessage={formData.nombreYapellidoPersona.showError}
                     validationMessage={nombreYapellidoPersonaValidationMessage}
                 />
-                <div></div>
-                <button disabled={isSubmitButtonDisabled}>
+                <div className="container-button">
+                { /*<button disabled={isSubmitButtonDisabled}>
                     Agregar Tarea
                 </button>
+                */}
+                <button disabled={isSubmitButtonDisabled} class="button">
+                    <span class="button__text">Add Task</span>
+                    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                </button>
+                </div>
             </form>
             <div>
                 <h2>Tareas</h2>
-                <table>
+                <table className="styled-table">
                     <thead>
                         <tr>
                             <th>Nombre</th>
