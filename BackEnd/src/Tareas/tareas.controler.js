@@ -7,7 +7,15 @@ import Tareas from "./tareas.model.js"
 export const createTarea = async (req, res)=>{
     try {
         const data = req.body
-        const tarea = await Tareas.create(data)
+        
+         // Convertir las fechas a cadenas
+        const fechaInicio = new Date(data.fechaInicio).toISOString().split('T')[0];
+        const fechaFin = new Date(data.fechaFin).toISOString().split('T')[0];
+
+        // Crear la tarea con las fechas como cadenas
+        const tarea = await Tareas.create({...data, fechaInicio, fechaFin});
+
+        
 
         return res.status(200).send({message: 'Tarea creada correctamente', tarea})
         
