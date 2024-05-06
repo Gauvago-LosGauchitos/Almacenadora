@@ -17,8 +17,10 @@ import toast from 'react-hot-toast';
 import './ListaTareas.css';
 
 export const TodoListForm = () => {
+    // Manejo de tareas utilizando el hook useTask
     const { addTask, updateTask, deleteTask, isLoading, getTasks, tasks, markTask } = useTask();
 
+    // Estado del formulario y su inicialización
     const [formData, setFormData] = useState({
         nombre: {
             value: "",
@@ -47,6 +49,7 @@ export const TodoListForm = () => {
         }
     });
 
+    // Comprobar si el botón de enviar está deshabilitado
     const isSubmitButtonDisabled =
         !formData.nombre.isValid ||
         !formData.description.isValid ||
@@ -54,6 +57,7 @@ export const TodoListForm = () => {
         !formData.fechaFin.isValid ||
         !formData.nombreYapellidoPersona.isValid;
 
+    // Obtener tareas cuando el componente se monta
     const fetchTasks = async () => {
         try {
             await getTasks();
@@ -66,6 +70,7 @@ export const TodoListForm = () => {
         fetchTasks();
     }, []);
 
+    // Actualizar el valor del campo del formulario
     const handleValueChange = (value, field) => {
         setFormData(prevData => ({
             ...prevData,
@@ -76,6 +81,7 @@ export const TodoListForm = () => {
         }));
     };
 
+    // Validar el campo del formulario al perder el foco
     const handleValidationOnBlur = (value, field) => {
         let isValid = false;
         switch (field) {
@@ -108,6 +114,7 @@ export const TodoListForm = () => {
         }));
     };
 
+    // Resetear el formulario
     const resetForm = () => {
         setFormData({
           nombre: {
@@ -137,7 +144,8 @@ export const TodoListForm = () => {
           }
         });
       };
-      //Funcion para agregar una tarea
+
+    // Función para agregar una tarea
     const handleAddTask = async (e) => {
         e.preventDefault();
         try {
@@ -156,7 +164,8 @@ export const TodoListForm = () => {
             toast.error('Error al agregar la tarea');
         }
     };
-    //Funcion para editar una tarea
+
+    // Función para editar una tarea
     const handleUpdateTask = async (taskId) => {
         try {
             await updateTask(taskId, {
@@ -174,7 +183,8 @@ export const TodoListForm = () => {
             toast.error('Error al actualizar la tarea');
         }
     };
-    //Funcion para eliminar una tarea
+
+    // Función para eliminar una tarea
     const handleDeleteTask = async (taskId) => {
         if (window.confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
             try {
@@ -186,33 +196,30 @@ export const TodoListForm = () => {
                 toast.error('Error al eliminar la tarea');
             }
         }
-        resetForm()
-        
+        resetForm();
     };
 
-    //Funcion para marcar tarea como hecho
+    // Función para marcar tarea como hecho
     const handleMarkTask = async(taskId) =>{
         try {
             await markTask(taskId, {
-                estado: taskId.estado//Marca la tarea como el estado que traiga, que es true porque se ejecuto la funcion
+                estado: taskId.estado // Esto parece incorrecto, debería ser `true` para marcar como hecho
             });
-            
             toast.success('Tarea actualizada correctamente');
             fetchTasks();
             resetForm()
         } catch (error) {
             console.error('Error al marcar la tarea:', error);
             toast.error('Error al marcar la tarea');
-            
         }
-    }   
+    };   
     
-    //Funcion para verificar si la tarea ya esta completada para marcar checkbox
+    // Función para verificar si la tarea ya está completada para marcar checkbox
     const handleCheckboxChange = (task) => {
-        return task.estado//retorna el estado de la tarea
-
+        return task.estado // Retorna el estado de la tarea
     };
 
+    // Manejar el clic en una fila de la tabla para cargar los valores de la tarea en el formulario
     const handleRowClick = (task) => {
         setFormData({
             nombre: {
@@ -243,10 +250,9 @@ export const TodoListForm = () => {
         });
     };
 
-    
-
     return (
         <div className="todo-list-container">
+            {/* Barra de navegación con el logo */}
             <nav class="navbar">
                 <div class="navbar-bg"></div>
                 <div class="navbar-content">
@@ -256,7 +262,9 @@ export const TodoListForm = () => {
                         alt="Logo" />
                 </div>
             </nav>
+            {/* Formulario para agregar tareas */}
             <form className="todo-form" onSubmit={handleAddTask}>
+                {/* Inputs para cada campo del formulario */}
                 <Input
                     field="nombre"
                     label="Nombre de la tarea"
@@ -311,17 +319,15 @@ export const TodoListForm = () => {
                     showErrorMessage={formData.nombreYapellidoPersona.showError}
                     validationMessage={nombreYapellidoPersonaValidationMessage}
                 />
+                {/* Botón para agregar tarea */}
                 <div className="container-button">
-                    { /*<button disabled={isSubmitButtonDisabled}>
-                    Agregar Tarea
-                </button>
-                */}
                     <button disabled={isSubmitButtonDisabled} class="button">
                         <span class="button__text">Add Task</span>
                         <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
                     </button>
                 </div>
             </form>
+            {/* Lista de tareas */}
             <div>
                 <h2>Tareas</h2>
                 <table className="styled-table">
@@ -338,16 +344,15 @@ export const TodoListForm = () => {
                     </thead>
                     <tbody>
                         {tasks && tasks.length > 0 && tasks.map((task, index) => (
-                           
+                            // Renderizar filas de la tabla con información de la tarea
                             <tr key={index} onClick={() => handleRowClick(task)}>
                                 <td>{task.nombre}</td>
                                 <td>{task.description}</td>
                                 <td>{task.fechaInicio}</td>
                                 <td>{task.fechaFin}</td>
                                 <td>{task.nombreYapellidoPersona}</td>
-                                
+                                {/* Botones de edición y eliminación */}
                                 <td>
-                                
                                     <button className="edit-button" data-action="delete" onClick={() => handleUpdateTask(task._id)}>
                                         <svg className="edit-svgIcon" viewBox="0 0 512 512">
                                             <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
@@ -359,6 +364,7 @@ export const TodoListForm = () => {
                                         </svg>
                                     </button>
                                 </td>
+                                {/* Checkbox para marcar como completada la tarea */}
                                 <td>
                                     <label class="cyberpunk-checkbox-label">
                                         <input type="checkbox"checked={handleCheckboxChange(task)} class="cyberpunk-checkbox" onClick={() => handleMarkTask(task._id)}/>
@@ -367,10 +373,8 @@ export const TodoListForm = () => {
                             </tr>
                         ))}
                     </tbody>
-
                 </table>
             </div>
         </div>
     );
 };
-
