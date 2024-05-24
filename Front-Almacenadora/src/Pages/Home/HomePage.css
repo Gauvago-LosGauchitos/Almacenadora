@@ -1,7 +1,6 @@
 .home-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ajusta la altura según sea necesario */
+    align-items: center; /* Ajusta la altura según sea necesario */
   }
   
