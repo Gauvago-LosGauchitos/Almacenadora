@@ -20,6 +20,9 @@ export const TodoListForm = () => {
     // Manejo de tareas utilizando el hook useTask
     const { addTask, updateTask, deleteTask, isLoading, getTasks, tasks, markTask } = useTask();
 
+    const [editMode, setEditMode] = useState(false)
+    const [taskIdBeingEdited, setTaskIdBeingEdited] = useState(null);
+
     // Estado del formulario y su inicialización
     const [formData, setFormData] = useState({
         nombre: {
@@ -166,23 +169,31 @@ export const TodoListForm = () => {
     };
 
     // Función para editar una tarea
-    const handleUpdateTask = async (taskId) => {
-        try {
-            await updateTask(taskId, {
-                nombre: formData.nombre.value,
-                description: formData.description.value,
-                fechaInicio: formData.fechaInicio.value,
-                fechaFin: formData.fechaFin.value,
-                nombreYapellidoPersona: formData.nombreYapellidoPersona.value
-            });
-            toast.success('Tarea actualizada correctamente');
-            fetchTasks();
-            resetForm()
-        } catch (error) {
-            console.error('Error al actualizar la tarea:', error);
-            toast.error('Error al actualizar la tarea');
+    const handleUpdateTask = async () => {
+        if (taskIdBeingEdited) {
+            try {
+                await updateTask(taskIdBeingEdited, {
+                    nombre: formData.nombre.value,
+                    description: formData.description.value,
+                    fechaInicio: formData.fechaInicio.value,
+                    fechaFin: formData.fechaFin.value,
+                    nombreYapellidoPersona: formData.nombreYapellidoPersona.value
+                });
+                toast.success('Tarea actualizada correctamente');
+                setEditMode(false);
+                setTaskIdBeingEdited(null);
+            } catch (error) {
+                console.error('Error al actualizar la tarea:', error);
+                toast.error('Error al actualizar la tarea');
+            }
         }
     };
+
+    //Habilitar botones a la hora de darle eliminar
+    const handleCancelEdit = async () => {
+        setEditMode(false)
+        resetForm()
+    }
 
     // Función para eliminar una tarea
     const handleDeleteTask = async (taskId) => {
@@ -221,6 +232,9 @@ export const TodoListForm = () => {
 
     // Manejar el clic en una fila de la tabla para cargar los valores de la tarea en el formulario
     const handleRowClick = (task) => {
+        setEditMode(true)
+        setTaskIdBeingEdited(task._id);
+
         setFormData({
             nombre: {
                 value: task.nombre,
@@ -248,6 +262,7 @@ export const TodoListForm = () => {
                 showError: false
             }
         });
+        console.log(editMode)
     };
 
     return (
@@ -258,12 +273,12 @@ export const TodoListForm = () => {
                     <img
                         className="nav-logo"
                         src={logo}
-                        alt="Logo"/>
+                        alt="Logo" />
                 </div>
             </nav>
             <div className="container">
                 {/* Formulario para agregar tareas */}
-                <form className="todo-form" onSubmit={handleAddTask}>
+                <form className="todo-form" >
                     {/* Inputs para cada campo del formulario */}
                     <Input
                         field="nombre"
@@ -320,12 +335,37 @@ export const TodoListForm = () => {
                         validationMessage={nombreYapellidoPersonaValidationMessage}
                     />
                     {/* Botón para agregar tarea */}
-                    <div className="container-button">
-                        <button disabled={isSubmitButtonDisabled} class="button">
-                            <span class="button__text">Add Task</span>
-                            <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
-                        </button>
-                    </div>
+
+                    {!editMode && (
+                        <div className="container-button">
+                            <button onClick={handleAddTask} disabled={isSubmitButtonDisabled} class="button">
+                                <span class="button__text">Add Task</span>
+                                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                            </button>
+                        </div>
+                    )}
+                     {/* Botón para editar tarea */}
+                    {editMode && (
+                        <div className="container-button">
+                            <button onClick={handleUpdateTask} disabled={isSubmitButtonDisabled} class="button">
+                                <span class="button__text">Edit Task</span>
+                                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                            </button>
+                        </div>
+                        
+                    )}
+                    {editMode && (
+                        <div className="container-button">
+                            <button onClick={handleCancelEdit} disabled={isSubmitButtonDisabled} class="button">
+                                <span class="button__text">Cancel Edit</span>
+                            </button>
+                        </div>
+                        
+                    )}
+
+                   
+
+
                 </form>
                 {/* Lista de tareas */}
                 <div className="task-container">

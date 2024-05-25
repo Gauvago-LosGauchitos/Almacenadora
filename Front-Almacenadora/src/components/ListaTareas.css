@@ -25,7 +25,10 @@ body {
 
 .task-container {
   flex: 2;
+  height: 500px;
   margin-left: 5vh;
+  display: flex;
+  overflow-y: auto
 
 }
 
@@ -170,6 +173,8 @@ table td {
   width: 100%;
   height: 100%;
   border-collapse: collapse;
+  height: 400px
+  
 }
 
 .styled-table th,

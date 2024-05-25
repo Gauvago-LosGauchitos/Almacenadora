@@ -51,7 +51,6 @@ export const useTask = () => {
         setIsLoading(true)
         try {
             const response = await updateTaskRequest(taskId, updatedTask)
-            console.log(response)
             await getTasks()
         } catch (error) {
             console.error('Error al actualizar la tarea:', error)
